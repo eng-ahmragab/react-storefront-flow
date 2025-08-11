@@ -2,41 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Modern E-commerce Design System */
 
 @layer base {
   :root {
+    /* Base colors */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 215 25% 27%;
 
+    /* Surface colors */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 27%;
+    --surface: 210 17% 98%;
+    --surface-foreground: 215 25% 27%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Primary brand colors - Modern indigo */
+    --primary: 225 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 225 83% 90%;
+    --primary-dark: 225 83% 35%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Secondary colors - Warm slate */
+    --secondary: 215 16% 47%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 215 16% 85%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Accent colors - Vibrant orange */
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 25 95% 90%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Utility colors */
+    --muted: 210 17% 95%;
+    --muted-foreground: 215 16% 47%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Border and input */
+    --border: 215 14% 89%;
+    --input: 215 14% 89%;
+    --ring: 225 83% 53%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Design tokens */
+    --radius: 0.75rem;
+    --shadow-sm: 0 1px 2px 0 hsl(215 25% 27% / 0.05);
+    --shadow: 0 4px 6px -1px hsl(215 25% 27% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(215 25% 27% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(215 25% 27% / 0.1);
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-dark)));
+    --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(25 95% 45%));
+    --gradient-surface: linear-gradient(180deg, hsl(var(--surface)), hsl(210 17% 96%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(210 17% 99%));
 
-    --radius: 0.5rem;
+    /* Animation */
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Spacing scale */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +135,55 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    background: var(--gradient-surface);
+  }
+}
+
+@layer components {
+  /* Modern card with subtle shadow and gradient */
+  .card-modern {
+    @apply bg-card rounded-xl shadow-lg border border-border/50;
+    background: var(--gradient-card);
+    transition: var(--transition-smooth);
+  }
+
+  .card-modern:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+  }
+
+  /* Product card specific styling */
+  .product-card {
+    @apply card-modern overflow-hidden;
+  }
+
+  /* Button variants */
+  .btn-gradient {
+    background: var(--gradient-primary);
+    transition: var(--transition-smooth);
+  }
+
+  .btn-gradient:hover {
+    background: var(--gradient-accent);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Navigation styling */
+  .nav-blur {
+    @apply backdrop-blur-lg bg-background/80 border-b border-border/50;
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Input enhancements */
+  .input-modern {
+    @apply border-border/50 bg-surface/50 backdrop-blur-sm;
+    transition: var(--transition-fast);
+  }
+
+  .input-modern:focus {
+    @apply ring-primary/20 border-primary/50;
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
   }
 }
